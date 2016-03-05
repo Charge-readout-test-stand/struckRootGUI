@@ -183,11 +183,11 @@ int main(int argc, char* argv[]) {
     // make trees
     TTree *tree[16];
 
-    //values for branches
+    //default values for branches
     //global parameters
-        Bool_t is_external = false;
+        Bool_t is_external = true;
         Float_t sampling_freq_Hz = 25e6; // in Hz
-        UShort_t wfm_delay = 300;
+        UShort_t wfm_delay = 200;
         UShort_t maw_delay = 600;
         Bool_t is_pospolarity[16];
         Bool_t is_50ohm[16];
@@ -405,8 +405,8 @@ int main(int argc, char* argv[]) {
 
                     ostringstream plotName; 
                     plotName << basename_str  << i_event;
-                    gl_graph_raw->c1->Print((plotName.str() + ".png").c_str());
-                    gl_graph_raw->c1->Print((plotName.str() + ".pdf").c_str());
+                    //gl_graph_raw->c1->Print((plotName.str() + ".png").c_str());
+                    //gl_graph_raw->c1->Print((plotName.str() + ".pdf").c_str());
                 }
               }
 
@@ -554,8 +554,8 @@ int main(int argc, char* argv[]) {
 
   legend.Draw();
   canvas.Update();
-  canvas.Print((basename_str + ".png").c_str());
-  canvas.Print((basename_str + ".pdf").c_str());
+  //canvas.Print((basename_str + ".png").c_str());
+  //canvas.Print((basename_str + ".pdf").c_str());
 
   for(int i=0; i<=15; i++) {tree[i]->Write();}
   canvas.Write();
