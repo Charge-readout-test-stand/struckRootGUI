@@ -1,3 +1,8 @@
+
+# executables:
+sis3316_root_gui
+sis3316_offline
+
 *.d
 
 # Compiled Object files
