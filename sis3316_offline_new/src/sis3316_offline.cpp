@@ -211,7 +211,7 @@ int main(int argc, char* argv[]) {
         Double_t timestampDouble = 0;
         //ULong64_t timestampLo = 0;
         //ULong64_t timestampHi = 0;
-        UShort_t * wfm = new UShort_t[2048*4]; 
+        UShort_t * wfm = new UShort_t[65536]; 
         Int_t * maw = new Int_t[2048*4];
 
     //read configuration file
