@@ -51,7 +51,7 @@ all: sis3316_offline
 sis3316_offline: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GCC C++ Linker'
-	g++ -L$(ROOTSYS)/lib $(LIBS) -o"sis3316_offline" $(OBJS) $(USER_OBJS)
+	g++ -L$(ROOTSYS)/lib -o"sis3316_offline" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
