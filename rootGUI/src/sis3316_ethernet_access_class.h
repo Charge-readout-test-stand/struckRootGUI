@@ -28,7 +28,8 @@
 #ifndef _SIS3316_ETHERNET_ACCESS_CLASS_
 #define _SIS3316_ETHERNET_ACCESS_CLASS_
 
-#define VME_FPGA_VERSION_IS_0008_OR_HIGHER
+// trying without this -- AGS 16 June 2016
+//#define VME_FPGA_VERSION_IS_0008_OR_HIGHER
 
 
 #include "project_system_define.h"		//define LINUX or WIN
