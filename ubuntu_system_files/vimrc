@@ -1,0 +1,61 @@
+" 23 Apr 2009 original from RAJ
+syntax on
+set ruler
+" color darkblue
+"inoremap ) )<left><c-o>%<c-o>:sleep 500m<CR><c-o>%<c-o>a
+
+:ab //- //------------------------------------------------------------------------------
+:ab %- %-------------------------------------------------------------------------------
+:ab %= %===============================================================================
+:ab #- #-------------------------------------------------------------------------------
+
+:set ai
+:set bs=2 
+:set tw=80
+:set sw=2
+:autocmd VimEnter * set vb t_vb=                  
+" :set ignorecase smartcase
+:set incsearch
+
+" indenting:
+:set tabstop=8
+:set expandtab
+:set shiftwidth=2
+:set smarttab autoindent
+
+" reflow a paragraph with Q:
+:nnoremap Q gqap
+
+" to make pasting smoother:
+:nnoremap <F5> :set invpaste paste?<Enter>
+:imap <F5> <C-O><F5>
+:set pastetoggle=<F5>
+
+:nnoremap <C-N> :next<Enter>
+:nnoremap <C-P> :prev<Enter>
+
+" additions:
+
+" www.ukuug.org/events/linux2004/programme/paper-SMyers/Linux_2004_slides/vim_tips/
+" http://www.oualline.com/vim-cook.html
+" 23 Apr 2009 added:
+set ignorecase smartcase " case-insensitive search
+set hlsearch "highlight all search matches for completion
+
+
+" vim uses the binary .spl file as its dictionary; periodically update the .spl
+"file from the .add file with:
+":mkspell! ~/rootScripts/systemFiles/generic/vimspell.utf-8.add
+"either by uncommenting the line above and using vi, or by pasting the line
+"above into a vi session
+
+" Only do this part when compiled with support for autocommands.
+
+if has("autocmd")
+    " disable autoindent, make the background dark, change the colorscheme to
+    " suit the dark background, make sure our textwidth is 72 characters and
+
+    autocmd FileType tex  set spell spelllang=en_us |
+
+
+endif " has("autocmd")
