@@ -383,7 +383,8 @@ TestMainFrame::TestMainFrame(const TGWindow *p, UInt_t w, UInt_t h)
 
 	//char  gl_sis3316_ip_addr_string[32] ;
 	//strcpy(gl_sis3316_ip_addr_string,"212.60.16.200") ; // SIS3316 IP address
-	strcpy(gl_sis3316_ip_addr_string,"169.254.202.151") ; // SIS3316 IP address
+	//strcpy(gl_sis3316_ip_addr_string,"169.254.202.151") ; // SIS3316 IP address
+	strcpy(gl_sis3316_ip_addr_string,"192.168.2.100") ; // SIS3316 IP address
 	//strcpy(gl_sis3316_ip_addr_string,"sis3316-0161") ; // SIS3316 IP address
 
 
