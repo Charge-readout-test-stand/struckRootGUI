@@ -309,6 +309,11 @@ while ((get_length = getline( &line, &len, fp)) != EOF) {
 	//printf("get_length = %d\n",get_length);
     //printf("sizeof(line) = %d\n",sizeof(line));
 
+    // strip newline character from end of line, if there is one -- AGS 17 June 2016
+    if (line[get_length - 1] == '\n') {
+      line[get_length - 1] = '\0';
+      --get_length;
+    } 
 
     key_word_length = this->getNofKewWordLetters (line, get_length);
 	//printf("key_word_length = %d\n",key_word_length);
@@ -363,6 +368,8 @@ while ((get_length = getline( &line, &len, fp)) != EOF) {
 	// TEXT_PARAMETER_WRITE_DATA_TO_FILE_PATH	
 			comp_err = strncmp( line, TEXT_PARAMETER_WRITE_DATA_TO_FILE_PATH, key_word_length );
 			if(comp_err == 0)  {
+                            cout << TEXT_PARAMETER_WRITE_DATA_TO_FILE_PATH << " " 
+                                << parameter_string << endl;
 				strcpy(char_WriteData_to_File_path, parameter_string);
 			}
 
@@ -1322,12 +1329,12 @@ bool sis3316_get_configuration_parameters::isKeyWord (char c )
 
 bool sis3316_get_configuration_parameters::isUpperLetter (char c )
 {
-	return (('A' <= c && c <= 'Z') || (c == '_') ) ;
+	return (('A' <= c && c <= 'Z') || (c == '_') || (c == '/')) ;
 }
 
 bool sis3316_get_configuration_parameters::isLowerLetter (char c )
 {
-	return (('a' <= c && c <= 'a') || (c == '_') ) ;
+	return (('a' <= c && c <= 'a') || (c == '_') || (c == '/')) ;
 }
 
 bool sis3316_get_configuration_parameters::isDigit (char c )
