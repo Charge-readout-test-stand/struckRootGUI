@@ -1281,8 +1281,7 @@ int sis3316_eth::vme_A32D32_read (UINT addr, UINT* data)
 	int return_code;
 	unsigned int udp_address ;
 	udp_address = addr & 0x00ffffff ; // only sis3316 address range
-        cout << "addr: " << addr << " data: " << data << " udp_address: " <<
-        udp_address << endl;
+        //cout << "addr: " << addr << " data: " << data << " udp_address: " << udp_address << endl;
 
 	if (udp_address < 0x20) {
 		return_code = this->udp_register_read(udp_address, data)  ;
