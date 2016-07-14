@@ -5,9 +5,8 @@
 #ifconfig eth1 192.168.2.99 # IP address jason N. uses
 #ifconfig eth1 up
 #
-#arp -i eth1 -s 192.168.1.100 00:00:56:31:60:9B   
-#arp -i eth1 -s 212.60.16.201 00:00:56:31:60:62   
-arp -i eth1 -s 192.168.2.100 00:00:56:31:60:62 # this is what Jason Newby uses
+arp -i eth1 -s 192.168.1.100 00:00:56:31:60:61 # S/N 97
+arp -i eth2 -s 192.168.2.100 00:00:56:31:60:62 # S/N 98 
 #
 #
 #
