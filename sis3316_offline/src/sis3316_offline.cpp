@@ -135,7 +135,6 @@ int main(int argc, char* argv[]) {
   unsigned bank_buffer_counter ;
 
   char filename[128]  ;
-  unsigned int i_file;
 
   bank_buffer_counter = 8 ;
 
@@ -147,14 +146,14 @@ int main(int argc, char* argv[]) {
   }
 
   // loop over enumerated files in internal directory:
-  //for (i_file=0; i_file<10; i_file++) {
+  //for (int i_file=0; i_file<10; i_file++) {
 
     //sprintf(filename,"../data_files/sample_test_gui/sis3316_test_data_%d.dat",i_file ) ;
     //sprintf(filename,"../data_files/external/sis3316_test_data_%d.dat",i_file ) ;
     //sprintf(filename,"../data_files/internal/sis3316_test_data_%d.dat",i_file ) ;
 
   // loop over args:
-  for (i_file = 1; i_file<theApp.Argc(); i_file++) {
+  for (int i_file = 1; i_file<theApp.Argc(); i_file++) {
 
     //cout << "filename: " <<  argv[i_file+1] << endl;
     //sprintf(filename,"%s",argv[i_file+1]) ;
@@ -375,8 +374,8 @@ int main(int argc, char* argv[]) {
 
                     ostringstream plotName; 
                     plotName << label  << i_event;
-                    gl_graph_raw->c1->Print((plotName.str() + ".png").c_str());
-                    gl_graph_raw->c1->Print((plotName.str() + ".pdf").c_str());
+                    //gl_graph_raw->c1->Print((plotName.str() + ".png").c_str());
+                    //gl_graph_raw->c1->Print((plotName.str() + ".pdf").c_str());
                 }
               }
 
@@ -511,8 +510,8 @@ int main(int argc, char* argv[]) {
     ostringstream selection;
 
     name << "wfm_max >> h" << i;  
-    selection << "channel==" << i; 
-    int n_counts = tree[0]->Draw(name.str().c_str(), selection.str().c_str(), "same");
+    //selection << "channel==" << i; 
+    int n_counts = tree[i]->Draw(name.str().c_str(), selection.str().c_str(), "same");
     cout << i << " | n counts = " << n_counts << " | " << name.str() << " | " << selection.str() << endl;
     entry << "ch " << i+1 << " (" << n_counts << ")";
     TH1D* hist = hist_array[i];
@@ -524,8 +523,8 @@ int main(int argc, char* argv[]) {
 
   legend.Draw();
   canvas.Update();
-  canvas.Print((label + ".png").c_str());
-  canvas.Print((label + ".pdf").c_str());
+  //canvas.Print((label + ".png").c_str());
+  //canvas.Print((label + ".pdf").c_str());
 
   for(int i=0; i<=15; i++) {tree[i]->Write();}
   canvas.Write();
