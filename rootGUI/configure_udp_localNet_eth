@@ -5,8 +5,19 @@
 #ifconfig eth1 192.168.2.99 # IP address jason N. uses
 #ifconfig eth1 up
 #
-arp -i eth1 -s 192.168.1.100 00:00:56:31:60:61 # S/N 97
-arp -i eth2 -s 192.168.2.100 00:00:56:31:60:62 # S/N 98 
+#
+# for VME pizza box
+#arp -i eth1 -s 192.168.1.100 00:00:56:31:60:61 # eth1 -> S/N 97
+#arp -i eth2 -s 192.168.2.100 00:00:56:31:60:62 # eth2 -> S/N 98 
+
+# for desktop unit:
+#arp -i eth1 -s 192.168.1.100 00:00:56:31:60:9b # eth1 -> S/N 155
+arp -i eth1 -s 192.168.1.100 00:00:56:31:60:9B # eth1 -> S/N 155
+
+#
+# reverse (for testing, ethernet cables need to be swapped also)
+#arp -i eth2 -s 192.168.2.100 00:00:56:31:60:61 # eth2 -> S/N 97
+#arp -i eth1 -s 192.168.1.100 00:00:56:31:60:62 # eth1 -> S/N 98 
 #
 #
 #
