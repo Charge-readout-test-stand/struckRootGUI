@@ -134,7 +134,7 @@ int main(int argc, char* argv[]) {
   //gl_graph_raw->sis3316_draw_XYaxis (wfm_length); // clear and draw X/Y
   unsigned bank_buffer_counter ;
 
-  char filename[128]  ;
+  char filename[256]  ;
 
   bank_buffer_counter = 8 ;
 
@@ -167,7 +167,7 @@ int main(int argc, char* argv[]) {
       cout << "option: " << filename_str << endl; 
       continue; 
     }
-    cout << "filename: " << filename << endl;
+    cout << "\n\nfilename: " << filename << endl;
     size_t dot = filename_str.find_last_of(".");
     size_t slash = filename_str.find_last_of("/");
     string label = "tier1_" + filename_str.substr(slash+1, dot-slash-1);
@@ -253,8 +253,6 @@ int main(int argc, char* argv[]) {
     }
 #endif
 
-    cout << "argc: " << argc << endl;
-    for (int i = 1; i < argc; i++){ cout << "argv[" << i << "]: " << argv[i] << endl; }
 
     //cout << theApp.Argc() << endl;
     //cout << theApp.Argv(i_file) << endl;
@@ -265,16 +263,14 @@ int main(int argc, char* argv[]) {
 
       do {
 
-        valid_BankBufferHeader_valid_flag = 0 ;
-
         // read the buffer header
         nof_read = ReadBufferHeaderCounterNofChannelToDataFile (&header_indentifier, &buffer_no, &channel_no, &nof_events, &event_length, &maw_length, &header_reserved) ;
         buffer_length = event_length * nof_events ;
 
-        printf("\n");
-        printf("header information: \tnof_read = %d    \tindentifier = %d   \tbuffer_no = %d  \tchannel_no = %d   \n", nof_read, header_indentifier, buffer_no, channel_no);
-        printf("header information: \tnof_events = %d  \tbuffer_length = %d   \tevent_length = %d    \n", nof_events, buffer_length, event_length );
-        printf("header information: \tmaw_length = %d \treserved = %d \n",  maw_length, header_reserved);
+        //printf("\n");
+        //printf("header information: \tnof_read = %d    \tindentifier = %d   \tbuffer_no = %d  \tchannel_no = %d   \n", nof_read, header_indentifier, buffer_no, channel_no);
+        //printf("header information: \tnof_events = %d  \tbuffer_length = %d   \tevent_length = %d    \n", nof_events, buffer_length, event_length );
+        //printf("header information: \tmaw_length = %d \treserved = %d \n",  maw_length, header_reserved);
         unsigned uint_plot_axis_flag;
         if (nof_read == 8) {
           uint_plot_axis_flag = 1 ;
@@ -292,7 +288,7 @@ int main(int argc, char* argv[]) {
           // mask and bitshift to get the channel number 
           i_ch = (gl_ch_data[0] & 0xfff0) >> 4 ;
           
-          printf("nof_read = %d  \tch = %d   \theaderformat = 0x%02X \n", nof_read, i_ch, headerformat);
+          //printf("nof_read = %d  \tch = %d   \theaderformat = 0x%02X \n", nof_read, i_ch, headerformat);
 
           if (i_ch != channel_no) {
             cout << "WARNING -- i_ch=" << i_ch << ", channel_no=" << channel_no << endl; 
