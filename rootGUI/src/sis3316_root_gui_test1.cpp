@@ -2455,6 +2455,10 @@ void SIS3316TestDialog::SIS3316_Test1()
 	ushort_adc_buffer_array_ptr[14] =(unsigned short*) gl_uint_adc15_buffer;
 	ushort_adc_buffer_array_ptr[15] = (unsigned short*) gl_uint_adc16_buffer;
 
+	// save parameters
+	getAdcParameters(params);
+	getGuiParameters(params);
+				
 
 	// Parameter Setup
 
@@ -4462,18 +4466,16 @@ void SIS3316TestDialog::SIS3316_Test1()
 				}
  
 				// prepare file write
-
-
-				char fileDateTime[20];
+                                char fileDateTime[20];
                                 #ifdef LINUX
                                 // this compiles but maybe time is not in right zone
                                 time_t rawTime;
                                 struct tm* timeinfo;
                                 time(&rawTime); 
                                 timeinfo = localtime(&rawTime);
-				sprintf(fileDateTime,"%04d-%02d-%02d_%02d-%02d-%02d",
-					timeinfo->tm_year,timeinfo->tm_mon,timeinfo->tm_mday,
-					timeinfo->tm_hour,timeinfo->tm_min,timeinfo->tm_sec);
+                                sprintf(fileDateTime,"%04d-%02d-%02d_%02d-%02d-%02d",
+                                       timeinfo->tm_year,timeinfo->tm_mon,timeinfo->tm_mday,
+                                       timeinfo->tm_hour,timeinfo->tm_min,timeinfo->tm_sec);
                                 #else
 				SYSTEMTIME localTime;
 				GetLocalTime(&localTime); // get local time
@@ -4482,25 +4484,33 @@ void SIS3316TestDialog::SIS3316_Test1()
 					localTime.wHour,localTime.wMinute,localTime.wSecond);
                                 #endif
 
+				char char_WriteConfig_to_File_filename[512]; //configuration file
+				//FILE *file_WriteConfig_to_File_Pointer;
+
 				if (uint_WriteData_to_File_EnableFlag == 1) {   ; //  
 					if (uint_WriteData_to_File_OpenFlag == 0) {   // first time
 						if (uint_WriteData_to_MultipleFiles_Flag == 0) {   // 
 							if (uint_Append_DateTime_Flag == 1) {
 								sprintf(char_WriteData_to_File_filename,"%s_%s.dat",char_WriteData_to_File_initialize_filename,fileDateTime ) ;
+								sprintf(char_WriteConfig_to_File_filename,"%s_%s.ini",char_WriteData_to_File_initialize_filename,fileDateTime ) ;
 							}
 							else {
 								sprintf(char_WriteData_to_File_filename,"%s.dat",char_WriteData_to_File_initialize_filename) ;
+								sprintf(char_WriteConfig_to_File_filename,"%s.ini",char_WriteData_to_File_initialize_filename) ;
 							}
 						}
 						else {
 							if (uint_Append_DateTime_Flag == 1) {
 								sprintf(char_WriteData_to_File_filename,"%s_%s.dat",char_WriteData_to_File_initialize_filename,fileDateTime) ;
+								sprintf(char_WriteConfig_to_File_filename,"%s_%s.ini",char_WriteData_to_File_initialize_filename,fileDateTime) ;
 							}
 							else {
 								sprintf(char_WriteData_to_File_filename,"%s_FILE%d.dat",char_WriteData_to_File_initialize_filename,uint_WriteData_to_File_counter) ;
+								sprintf(char_WriteConfig_to_File_filename,"%s_FILE%d.ini",char_WriteData_to_File_initialize_filename,uint_WriteData_to_File_counter) ;
 							}
 						}
 						file_WriteData_to_File_Pointer = fopen(char_WriteData_to_File_filename,"wb") ;
+						//file_WriteConfig_to_File_Pointer = fopen(char_WriteConfig_to_File_filename,"wb") ;
 						uint_WriteData_to_File_OpenFlag = 1 ;
 					}
 					else { // file is open
@@ -4511,16 +4521,22 @@ void SIS3316TestDialog::SIS3316_Test1()
 								uint_WriteData_to_File_counter++;
 								if (uint_Append_DateTime_Flag == 1) {
 									sprintf(char_WriteData_to_File_filename,"%s_%s.dat",char_WriteData_to_File_initialize_filename,fileDateTime) ;
+								    sprintf(char_WriteConfig_to_File_filename,"%s_%s.ini",char_WriteData_to_File_initialize_filename,fileDateTime) ;
 								}
 								else {
 									sprintf(char_WriteData_to_File_filename,"%s_FILE%d.dat",char_WriteData_to_File_initialize_filename,uint_WriteData_to_File_counter) ;
+									sprintf(char_WriteConfig_to_File_filename,"%s_FILE%d.ini",char_WriteData_to_File_initialize_filename,uint_WriteData_to_File_counter) ;
 								}
 								file_WriteData_to_File_Pointer = fopen(char_WriteData_to_File_filename,"wb") ;
+								//file_WriteConfig_to_File_Pointer = fopen(char_WriteConfig_to_File_filename,"wb") ;
 							}
 						}
 					}
 				}
-
+				
+				//write parameter file, if it does not exist
+				FILE* file_WriteConfig_to_File = fopen(char_WriteConfig_to_File_filename, "r");
+				if(!file_WriteConfig_to_File) {params->write_parameter_file(char_WriteConfig_to_File_filename);}
 
 				if(plot_length != 0) {
 				// prepare Raw data graph
