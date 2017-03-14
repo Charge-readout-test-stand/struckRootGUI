@@ -4469,12 +4469,13 @@ void SIS3316TestDialog::SIS3316_Test1()
                                 char fileDateTime[20];
                                 #ifdef LINUX
                                 // this compiles but maybe time is not in right zone
+                                // http://www.cplusplus.com/reference/ctime/tm/
                                 time_t rawTime;
                                 struct tm* timeinfo;
                                 time(&rawTime); 
                                 timeinfo = localtime(&rawTime);
                                 sprintf(fileDateTime,"%04d-%02d-%02d_%02d-%02d-%02d",
-                                       timeinfo->tm_year,timeinfo->tm_mon,timeinfo->tm_mday,
+                                       timeinfo->tm_year+1900,timeinfo->tm_mon+1,timeinfo->tm_mday,
                                        timeinfo->tm_hour,timeinfo->tm_min,timeinfo->tm_sec);
                                 #else
 				SYSTEMTIME localTime;
